@@ -1,0 +1,88 @@
+<section class="landing-banner">
+    <div class="landing-caption">
+        <div class="container">
+            <h1>El banco de los estudiantes</h1>
+            <h2>¡Somos Estudiantes!</h2>
+        </div>
+    </div>
+</section>
+<div class="scs-slot" id="slt_cardsSolucionLinea">
+    <div id="cmp_home_cardsSolucionesLinea" class="scs-component-container">
+        <div class="scs-component-bounding-box">
+            <div data-bind="component: { name: 'scs-component', params: {scsComponent: tagData}}">
+                <div data-bind="attr: {class: computedStyleClass, style: encodeCSS(computedWrapperStyle)}" class="scs-custom-component scs-component cmp_home_cardsSolucionesLinea-default-style" style="margin-top:0px;margin-right:0px;margin-bottom:0px;margin-left:0px;">
+                    <div class="scs-component-content" data-bind="attr: { style: encodeCSS(computedContentStyle)}" style="width:100%;">
+                        <div data-bind="attr: {'style': encodeCSS(computedStyle)}" class="scs-custom-component-wrapper" style="">
+                            <div data-bind="attr: {'id': customComponentDiv }" id="cmp_home_cardsSolucionesLineacustomComponentDiv">
+                                <div id="cmp_home_cardsSolucionesLinea_content_undefined">
+                                    <div data-bind="foreach: tituloContent" class="contenedor-titulo-cards-solucion">
+                                        <p data-bind="text:titulo" class="titulo-cards-solucion">Soluciones en línea</p>
+                                        <p data-bind="text:descripcion" class="descripcion-cards-solucion">Todo lo que necesitas sin salir de casa.</p>
+                                    </div>
+                                    <div class="contenedor-padre-cards-solucion">
+                                        <!--Flechas del carrusel-->
+                                        <div class="flechas-carrusel-cards-solucion">
+                                            <button type="button" class="gray-arrow float-left arrow-carrousel-banner" data-bind="click: movimientoTarjetaIzquierda">❮</button>
+                                            <button type="button" class="gray-arrow float-right arrow-carrousel-banner" data-bind="click: movimientoTarjetaDerecha">❯</button>
+                                        </div>
+                                    
+                                        <div class="contendor-cards-solucion">
+                                            <!-- ko foreach: listaCards -->
+                                            <a class="card-solucion-linea" data-bind="css: { 'd-none' : numeroCard > 5 }, attr:{ href: link }" href="detalle-producto/personas-cuentas-ahorro-flexible">
+                                                <img width="186.4" height="56" data-bind="attr:{src: imagen, alt: altImg}" alt="Alt Imagen 1" class="padding-card-soluciones" src="https://www.pichincha.com/content/published/api/v1.1/assets/CONTC100B5A730FB4838841B8A67E59BABAE/native?cb=_cache_f94f&amp;channelToken=712a6518832146c488cdf196228d8c00">
+                                                <p class="titulo-card-solucion padding-titulo-card-soluciones" data-bind="text:titulo">Ahorro Flexible</p>
+                                                <p class="descripcion-card-solucion padding-card-soluciones" data-bind="text:descripcion">Gana 5% de interés y ten tu dinero siempre disponible.</p>
+                                                <p class="link-card-solucion ga4-text-link" data-bind="text:textoLink">Abrir cuenta</p>
+                                            </a>
+                                            
+                                            <a class="card-solucion-linea" data-bind="css: { 'd-none' : numeroCard > 5 }, attr:{ href: link }" href="detalle-producto/personas-inversiones-plazodolar">
+                                                <img width="186.4" height="56" data-bind="attr:{src: imagen, alt: altImg}" alt="Alt Imagen 2" class="padding-card-soluciones" src="https://www.pichincha.com/content/published/api/v1.1/assets/CONT4E21C32B84AF41459D7A0664268045F7/native?cb=_cache_f94f&amp;channelToken=712a6518832146c488cdf196228d8c00">
+                                                <p class="titulo-card-solucion padding-titulo-card-soluciones" data-bind="text:titulo">Inversiones</p>
+                                                <p class="descripcion-card-solucion padding-card-soluciones" data-bind="text:descripcion">Simula tu inversión con un mejor interés en línea.</p>
+                                                <p class="link-card-solucion ga4-text-link" data-bind="text:textoLink">Simular inversión</p>
+                                            </a>
+                                            
+                                            <a class="card-solucion-linea" data-bind="css: { 'd-none' : numeroCard > 5 }, attr:{ href: link }" href="https://www.pichincha.com/detalle-producto/personas-prestamo-multiproposito">
+                                                <img width="186.4" height="56" data-bind="attr:{src: imagen, alt: altImg}" alt="Alt Imagen 3" class="padding-card-soluciones" src="https://www.pichincha.com/content/published/api/v1.1/assets/CONT45177518AB314CAD8E1A6AF5CB8613A8/native?cb=_cache_f94f&amp;channelToken=712a6518832146c488cdf196228d8c00">
+                                                <p class="titulo-card-solucion padding-titulo-card-soluciones" data-bind="text:titulo">Préstamo</p>
+                                                <p class="descripcion-card-solucion padding-card-soluciones" data-bind="text:descripcion">Solicita tu préstamo y obtén una respuesta inmediata.</p>
+                                                <p class="link-card-solucion ga4-text-link" data-bind="text:textoLink">Solicitar préstamo</p>
+                                            </a>
+                                            
+                                            <a class="card-solucion-linea" data-bind="css: { 'd-none' : numeroCard > 5 }, attr:{ href: link }" href="https://tarjetas.pichincha.com/tarjetas-credito?utm_source=portal&amp;utm_medium=referral&amp;utm_campaign=tarjeta_credito&amp;utm_content=btn_abrazo_portal_tarjetas">
+                                                <img width="186.4" height="56" data-bind="attr:{src: imagen, alt: altImg}" alt="Alt Imagen 4" class="padding-card-soluciones" src="https://www.pichincha.com/content/published/api/v1.1/assets/CONT5A4F70AB98F44B538DD7FBAB24ECC296/native?cb=_cache_f94f&amp;channelToken=712a6518832146c488cdf196228d8c00">
+                                                <p class="titulo-card-solucion padding-titulo-card-soluciones" data-bind="text:titulo">Tarjeta de crédito</p>
+                                                <p class="descripcion-card-solucion padding-card-soluciones" data-bind="text:descripcion">Solicita tu nueva tarjeta en pocos pasos.</p>
+                                                <p class="link-card-solucion ga4-text-link" data-bind="text:textoLink">Solicitar tarjeta</p>
+                                            </a>
+                                            
+                                            <a class="card-solucion-linea" data-bind="css: { 'd-none' : numeroCard > 5 }, attr:{ href: link }" href="https://creditohipotecario.pichincha.com/?utm_source=portal&amp;utm_medium=referral&amp;utm_campaign=creditohipotecario&amp;utm_content=btn_abrazo_portal_hipotecario">
+                                                <img width="186.4" height="56" data-bind="attr:{src: imagen, alt: altImg}" alt="Alt Imagen 5" class="padding-card-soluciones" src="https://www.pichincha.com/content/published/api/v1.1/assets/CONT5DCC8106157347468A1A0B6FCDFAC0DF/native?cb=_cache_f94f&amp;channelToken=712a6518832146c488cdf196228d8c00">
+                                                <p class="titulo-card-solucion padding-titulo-card-soluciones" data-bind="text:titulo">Préstamo de vivienda</p>
+                                                <p class="descripcion-card-solucion padding-card-soluciones" data-bind="text:descripcion">Descubre la mejor opción para financiar tu casa soñada.</p>
+                                                <p class="link-card-solucion ga4-text-link" data-bind="text:textoLink">Ver opciones</p>
+                                            </a>
+                                            
+                                            <a class="card-solucion-linea d-none" data-bind="css: { 'd-none' : numeroCard > 5 }, attr:{ href: link }" href="https://seguros.pichincha.com/fraudes/autogestion">
+                                                <img width="186.4" height="56" data-bind="attr:{src: imagen, alt: altImg}" alt="Alt Imagen 6" class="padding-card-soluciones" src="https://www.pichincha.com/content/published/api/v1.1/assets/CONTEF27293E4DFF4B3F824A6808FBE7605F/native?cb=_cache_f94f&amp;channelToken=712a6518832146c488cdf196228d8c00">
+                                                <p class="titulo-card-solucion padding-titulo-card-soluciones" data-bind="text:titulo">Seguro contra fraudes</p>
+                                                <p class="descripcion-card-solucion padding-card-soluciones" data-bind="text:descripcion">Protege tus cuentas y tarjetas por menos de $4,09 al mes.</p>
+                                                <p class="link-card-solucion ga4-text-link" data-bind="text:textoLink">Contrátalo en línea</p>
+                                            </a>
+                                            <!-- /ko -->
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <!-- initialize the component factory -->
+                    <div data-bind="scsCompComponentImpl: componentFactory"></div>
+                </div>
+                <!-- /ko -->
+                <!-- /ko -->
+                <div class="scs-hidden" data-bind="scsRenderStatus: {'id': id, 'status': defaultRenderStatus, 'checkCustomRenderComplete': true}"></div>
+            </div>
+        </div>
+    </div>
+</div>
