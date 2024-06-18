@@ -5,30 +5,79 @@ document.addEventListener('DOMContentLoaded', function() {
         return userAgent || screenSize
     }
 
-    function fetchContent(url){
+    function fetchContent(url) {
         return fetch(url)
             .then(response => response.text())
-            .then(data => data)
-            .catch(error => {
-                console.error('Error fetching the content', error)
-                return '<h2>Error loading content</h2><br><p>There was an error loading the content</p>'
+            .then(data => {
+                const parser = new DOMParser();
+                return parser.parseFromString(data, 'text/html');
             })
+            .catch(error => {
+                console.error('Error fetching the content', error);
+                const errorHtml = '<h2>Error loading content</h2><br><p>There was an error loading the content</p>';
+                const parser = new DOMParser();
+                return parser.parseFromString(errorHtml, 'text/html');
+            });
     }
+    
+    function loadControls(ArgContent) {
+        ArgContent.addEventListener('submit', async function(event){
+            if(event.target && event.target.id === 'loginForm'){
+                event.preventDefault();
 
-    async function loadContent(ArgPage){
-        let contentUrl = `pages/${
-            ArgPage === 'Home' && localStorage.token ?
-            'App' :
-            ArgPage === 'Login' ?
-                'Login' :
-                'info'
-        }.html`
-        const content = await fetchContent(contentUrl)
-        main.innerHTML = content
+                const username = loginForm.querySelector('#username').value;
+                const password = loginForm.querySelector('#password').value;
+    
+                try {
+                    const response = await fetch('/assets/json/users.json');
+                    const users = await response.json();
+    
+                    const user = users.find(u => u.username === username && u.password === password);
+    
+                    if (user) {
+                        const token = Math.random().toString(36).substr(2);
+                        localStorage.setItem('token', token);
+    
+                        loadContent('Home');
+                    } else {
+                        alert('Invalid Username or password');
+                    }
+                } catch (e) {
+                    console.log('Error fetching users json', e);
+                    alert('There was an error logging in. Please Try again later');
+                }
+            }
+        })
+    }
+    
+    async function loadContent(ArgPage) {
+
+        let currentPage = 
+        ArgPage === 'Home' && !localStorage.token ? 'info' :
+        ArgPage === 'Login' && !localStorage.token ? 'Login' :
+        'App'
+
+        let contentUrl = `pages/${currentPage}.html`;
+
+        const content = await fetchContent(contentUrl);
+        const main = document.getElementById('main');
+        const token = localStorage.getItem('token')
+
+        main.innerHTML = '';
+        Array.from(content.body.childNodes).forEach(node => {
+            main.appendChild(document.importNode(node, true));
+        });
+    
+        loadControls(main)
+        if(currentPage === 'info') initCarousel()
+
+        document.getElementById(`${!isMobile() ? 'li_login' : 'mm-li_login'}`).style.display = !token ? 'inline-block' : 'none'
+        document.getElementById(`${!isMobile() ? 'li_logout' : 'mm-li_logout'}`).style.display = token ? 'inline-block' : 'none'
+
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
-        });    
+        });
     }
 
     function toggleActive(){
@@ -52,10 +101,9 @@ document.addEventListener('DOMContentLoaded', function() {
         const mainPage = document.getElementById('page')
         const main = document.getElementById('main')
         const mainHeight = window.innerHeight
-        main.style.minHeight = mainPage.style.minHeight = mainHeight + 'px'
+        const body = document.body
 
-        const token = localStorage.getItem('token')
-        document.getElementById(`${token ? 'li_login' : 'li_logout'}`).style.display = 'none'
+        main.style.minHeight = mainPage.style.minHeight = mainHeight + 'px'
         
         const btn_mobile = document.querySelector('a.btn_mobile')
         btn_mobile?.addEventListener('click', function(event){
@@ -63,58 +111,29 @@ document.addEventListener('DOMContentLoaded', function() {
             toggleActive()
         })
 
+    
+        const menuLinks = document.querySelectorAll('a[data-id]')
+    
+        menuLinks.forEach((link) => {
+            link.addEventListener('click', function(event){
+                event.preventDefault()
+                if(isMobile()) btn_mobile?.click()
+
+                if(link.dataset.id !== 'Logout') {
+                    loadContent(link.dataset.id)
+                } else {
+                    event.preventDefault()
+                    localStorage.removeItem('token')
+
+                    loadContent('Home')
+                }
+            })
+        })
+        
+        isMobile() ? body?.classList.add('mobile-device') : body.classList.remove('mobile-device')
+    
         loadContent('Home')
     }
-
-    const body = document.body
-    const main = document.getElementById('main')
-
-    const menuLinks = document.querySelectorAll('a[data-id]')
-
-    menuLinks.forEach((link) => {
-        link.addEventListener('click', function(event){
-            event.preventDefault()
-            loadContent(link.dataset.id)
-        })
-    })
-    
-    isMobile() ? body?.classList.add('mobile-device') : body.classList.remove('mobile-device')
-
-    this.querySelectorAll('#logout').forEach((link) => {
-        link?.addEventListener('click', function(event){
-            event.preventDefault()
-
-            localStorage.removeItem('token')
-            loadContent('Home')
-        })
-    })
-
-    const loginForm = document.getElementById('loginForm')
-
-    loginForm?.addEventListener('submit', async function(event){
-        event.preventDefault()
-
-        const username = document.getElementById('username').value
-        const password = document.getElementById('password').value
-
-        try {
-            const response = await fetch('assets/json/users.json')
-            const users = await response.json()
-
-            const user = users.find(u => u.username === username && u.password === password)
-            if(user){
-                const token = Math.random().toString(36).substr(2)
-                localStorage.setItem('token', token)
-
-                loadContent('Home')
-            } else {
-                alert('Invalid Username or password')
-            }
-        } catch (e) {
-            console.log('Error fetching users json', e)
-            alert('There was an error logging in. Please Try again later')
-        }
-    })
 
     initPage()
 })
