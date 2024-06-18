@@ -9,42 +9,42 @@ document.addEventListener('DOMContentLoaded', function() {
         return fetch(url)
             .then(response => response.text())
             .then(data => {
-                const parser = new DOMParser();
-                return parser.parseFromString(data, 'text/html');
+                const parser = new DOMParser()
+                return parser.parseFromString(data, 'text/html')
             })
             .catch(error => {
-                console.error('Error fetching the content', error);
-                const errorHtml = '<h2>Error loading content</h2><br><p>There was an error loading the content</p>';
-                const parser = new DOMParser();
-                return parser.parseFromString(errorHtml, 'text/html');
-            });
+                console.error('Error fetching the content', error)
+                const errorHtml = '<h2>Error loading content</h2><br><p>There was an error loading the content</p>'
+                const parser = new DOMParser()
+                return parser.parseFromString(errorHtml, 'text/html')
+            })
     }
     
     function loadControls(ArgContent) {
         ArgContent.addEventListener('submit', async function(event){
             if(event.target && event.target.id === 'loginForm'){
-                event.preventDefault();
+                event.preventDefault()
 
-                const username = loginForm.querySelector('#username').value;
-                const password = loginForm.querySelector('#password').value;
+                const username = loginForm.querySelector('#username').value
+                const password = loginForm.querySelector('#password').value
     
                 try {
-                    const response = await fetch('/assets/json/users.json');
-                    const users = await response.json();
+                    const response = await fetch('/assets/json/users.json')
+                    const users = await response.json()
     
-                    const user = users.find(u => u.username === username && u.password === password);
+                    const user = users.find(u => u.username === username && u.password === password)
     
                     if (user) {
-                        const token = Math.random().toString(36).substr(2);
-                        localStorage.setItem('token', token);
+                        const token = Math.random().toString(36).substr(2)
+                        localStorage.setItem('token', token)
     
-                        loadContent('Home');
+                        loadContent('Home')
                     } else {
-                        alert('Invalid Username or password');
+                        alert('Invalid Username or password')
                     }
                 } catch (e) {
-                    console.log('Error fetching users json', e);
-                    alert('There was an error logging in. Please Try again later');
+                    console.log('Error fetching users json', e)
+                    alert('There was an error logging in. Please Try again later')
                 }
             }
         })
@@ -57,16 +57,16 @@ document.addEventListener('DOMContentLoaded', function() {
         ArgPage === 'Login' && !localStorage.token ? 'Login' :
         'App'
 
-        let contentUrl = `pages/${currentPage}.html`;
+        let contentUrl = `pages/${currentPage}.html`
 
-        const content = await fetchContent(contentUrl);
-        const main = document.getElementById('main');
+        const content = await fetchContent(contentUrl)
+        const main = document.getElementById('main')
         const token = localStorage.getItem('token')
 
-        main.innerHTML = '';
+        main.innerHTML = ''
         Array.from(content.body.childNodes).forEach(node => {
-            main.appendChild(document.importNode(node, true));
-        });
+            main.appendChild(document.importNode(node, true))
+        })
     
         loadControls(main)
         if(currentPage === 'info') initCarousel()
@@ -77,7 +77,7 @@ document.addEventListener('DOMContentLoaded', function() {
         window.scrollTo({
             top: 0,
             behavior: 'smooth'
-        });
+        })
     }
 
     function toggleActive(){
