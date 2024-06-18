@@ -7,7 +7,7 @@ function initCarousel() {
     const mainCarouselWidth = mainCarousel.clientWidth
 
     const cardsToShow = 5 
-    const cardWidth = mainCarouselWidth / 4
+    const cardWidth = mainCarouselWidth > 478 ?  mainCarouselWidth / 4 : mainCarouselWidth /3
 
     if (cards.length > 4) {
         cards.forEach(card => {

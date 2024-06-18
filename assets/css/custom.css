@@ -706,6 +706,7 @@ header.sticky .hamburger-inner, header.sticky .hamburger-inner::before, header.s
 }
 .cards-title h2 {
     margin: 25px 0 0 0;
+    font-size: 2rem;
 }
 .cards-title p {
     font-size: 24px;
@@ -790,6 +791,54 @@ header.sticky .hamburger-inner, header.sticky .hamburger-inner::before, header.s
     backface-visibility: hidden;
     -webkit-transform: translateZ(0) scale(1, 1);
     transform: scale(1);
+}
+.cards-arrows {
+    margin-top: 10px;
+    text-align: center;
+    -webkit-tap-highlight-color: transparent;
+    position: relative;
+    height: 0px;
+}
+
+@media screen and (min-width: 480px) {
+    .cards-arrows .nav-prev {
+        position: relative;
+        left: -190px !important;
+        top: 0;
+    }
+    .cards-arrows .nav-next {
+        position: relative;
+        left: 190px !important;
+        top: 0;
+    }
+}
+.cards-arrows [class*='nav-'] {
+    color: #FFF;
+    font-size: 14px;
+    margin: 5px;
+    padding: 4px 7px;
+    background: #D6D6D6;
+    display: inline-block;
+    cursor: pointer;
+    border-radius: 3px;
+}
+.cards-arrows [class*='nav-']:hover {
+    background: #869791;
+    color: #FFF;
+    text-decoration: none;
+}
+[class*='nav-'] span{
+    font-style: normal;
+    font-weight: normal;
+    display: inline-block;
+    text-decoration: inherit;
+    width: 1em;
+    margin-right: .2em;
+    text-align: center;
+    font-variant: normal;
+    text-transform: none;
+    line-height: 1em;
+    margin-left: .2em;
 }
 /* End Carousel */
 
